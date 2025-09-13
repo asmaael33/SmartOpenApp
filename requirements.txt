@@ -1,0 +1,8 @@
+streamlit
+transformers
+torch
+librosa
+sounddevice
+soundfile
+pyttsx3
+speechrecognition
