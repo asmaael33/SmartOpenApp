@@ -8,4 +8,3 @@ pydub
 openai
 google-generativeai
 mutagen
-tk
