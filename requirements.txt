@@ -8,3 +8,4 @@ pydub
 openai
 google-generativeai
 mutagen
+tkinter 
