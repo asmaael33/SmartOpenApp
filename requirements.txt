@@ -1,8 +1,10 @@
 streamlit
-transformers
-torch
-librosa
 sounddevice
-soundfile
-pyttsx3
-speechrecognition
+scipy
+pydub
+google-generativeai
+SpeechRecognition
+pydub
+openai
+google-generativeai
+mutagen
