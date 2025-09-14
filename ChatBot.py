@@ -25,7 +25,7 @@ recording = []
 stream = None
 mp3_filename = ""
 audio_folder = "." 
-
+duration = 5 
 
 # 🎼 Audio Emotion Detection (simple MFCC + threshold logic)
 def detect_audio_emotion(audio_path):
@@ -58,17 +58,15 @@ def callback(indata, frames, time, status):
     recording.append(indata.copy())
 
 def start_recording():
-    global stream, recording
+    global stream, recording, mp3_filename
     recording = []
-    try:
-        stream = sd.InputStream(samplerate=sample_rate, channels=channels, dtype='int16', callback=callback)
-        stream.start()
-        messagebox.showinfo("Recording", "Recording started. Click 'Stop' to finish.")
-    except Exception as e:
-        messagebox.showerror("Error", str(e))
+    record_button.config(text="🔴 Recording…", bg="red", state="disabled")
+    stream = sd.InputStream(samplerate=sample_rate, channels=channels, dtype='int16', callback=callback)
+    stream.start()
 
 def stop_recording():
     global stream, mp3_filename
+    record_button.config(text="🎙️ AskMe", bg="lightgreen")
     try:
         if stream:
             stream.stop()
@@ -200,14 +198,14 @@ root.geometry("360x400")
 label = tk.Label(root, text="ChatBot", font=("Arial", 12))
 label.pack(pady=10)
 
-start_button = tk.Button(root, text="🎙️ AskMe", command=start_recording, font=("Arial", 12), bg="lightgreen")
-start_button.pack(pady=5)
+record_button = tk.Button(root, text="🎙️ AskMe", command=start_recording, font=("Arial", 12), bg="lightgreen")
+record_button.pack(pady=5)
 
 stop_button = tk.Button(root, text="⏹️ StopRecording", command=stop_recording, font=("Arial", 12), bg="lightcoral")
 stop_button.pack(pady=5)
 
-play_button = tk.Button(root, text="▶️ PlayLast", command=lambda: play_audio(), font=("Arial", 12), bg="lightblue")
-play_button.pack(pady=5)
+#play_button = tk.Button(root, text="▶️ PlayLast", command=lambda: play_audio(), font=("Arial", 12), bg="lightblue")
+#play_button.pack(pady=5)
 
 
 detect_emotion_button = tk.Button(root, text="🤔 DetectEmotion", command=lambda: detect_audio_emotion(), font=("Arial", 12), bg="lightblue")
@@ -218,7 +216,7 @@ refresh_button = tk.Button(root, text="🔄 RefreshList", command=refresh_mp3_li
 refresh_button.pack(pady=5)
 
 
-transcribe_selected_button = tk.Button(root, text="📝 Transcribe Selected", font=("Arial", 12), bg="lightyellow")
+transcribe_selected_button = tk.Button(root, text="📝 AnswerRequest", font=("Arial", 12), bg="lightyellow")
 transcribe_selected_button.pack(pady=5)
 transcribe_selected_button.config(command=transcribe_selected)
 
