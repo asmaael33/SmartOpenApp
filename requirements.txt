@@ -8,3 +8,8 @@ pydub
 openai
 google-generativeai
 mutagen
+streamlit-webrtc
+av
+numpy
+gtts
+librosa
